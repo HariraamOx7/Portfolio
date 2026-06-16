@@ -6,8 +6,8 @@ const educationData = [
   {
     degree: "Bachelor of Engineering (B.E.)",
     field: "Computer Science and Engineering",
-    institution: "Engineering College",
-    period: "2022 – 2026",
+    cgpa: 7.98,
+    period: "2024 – 2028",
     location: "Tamil Nadu, India",
     status: "Ongoing",
     highlights: [
