@@ -98,7 +98,7 @@ const Education = () => (
               <div className="flex flex-wrap gap-4 mb-5 text-sm text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <FiBook size={13} className="text-slate-500" />
-                  {edu.institution}
+                  {edu.cgpa}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <FiCalendar size={13} className="text-slate-500" />
