@@ -7,7 +7,7 @@ const projects = [
     title: "Job Portal System",
     description:
       "A full-stack Job Portal web application that connects job seekers and recruiters. Features include user authentication, job posting, job applications, profile management, and responsive UI design.",
-    tags: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "MongoDB"],
+    tags: ["HTML", "CSS", "JavaScript" ],
     github: "https://github.com/HariraamOx7/job-portal",
     status: "live",
     color: "#6C63FF",
