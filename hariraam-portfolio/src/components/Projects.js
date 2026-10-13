@@ -1,15 +1,37 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FiGithub, FiLayers } from "react-icons/fi";
+import { FiGithub, FiLayers, FiExternalLink } from "react-icons/fi";
 
 const projects = [
+  {
+    title: "BhuSetu",
+    description: "A geospatial mapping prototype combining land parcels with revenue, municipal, electricity, water, and sewer records for Kondapur, Hyderabad.",
+    tags: ["Python", "Streamlit", "GeoPandas", "Pandas", "NumPy"],
+    github: "https://github.com/dhariqanvar-7/SIH-prototype",
+    live: "https://bhusetu.streamlit.app/",
+    color: "#10B981",
+  },
+  {
+    title: "Agentic Travel Planner",
+    description: "An AI-powered travel planner with a chat interface to discover destinations, attractions, weather, accommodation, meals, and transport.",
+    tags: ["React", "Python", "FastAPI", "spaCy", "OR-Tools", "SQLite"],
+    github: "https://github.com/HariraamOx7/travel_agent",
+    color: "#00D4FF",
+  },
+  {
+    title: "KR Exports Store Management",
+    description: "A web-based inventory and purchasing system covering supplier and item records, purchase orders, receipts, and stock issues.",
+    tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "MySQL", "Jenkins"],
+    github: "https://github.com/HariraamOx7/inventory_management_system",
+    live: "https://krexports.org/krestore",
+    color: "#FF6584",
+  },
   {
     title: "Job Portal System",
     description:
       "A full-stack Job Portal web application that connects job seekers and recruiters. Features include user authentication, job posting, job applications, profile management, and responsive UI design.",
     tags: ["HTML", "CSS", "JavaScript" ],
     github: "https://github.com/HariraamOx7/job-portal",
-    status: "live",
     color: "#6C63FF",
   },
 ];
@@ -60,7 +82,7 @@ const ProjectCard = ({ project }) => (
           <FiLayers style={{ color: project.color }} size={18} />
         </div>
 
-        {project.status === "live" && (
+        {project.live && (
           <span className="flex items-center gap-1.5 text-xs text-green-400 bg-green-400/10 border border-green-400/20 px-2.5 py-1 rounded-full">
             <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
             Live
@@ -95,17 +117,28 @@ const ProjectCard = ({ project }) => (
         ))}
       </div>
 
-      {/* GitHub Link Only */}
-      <div className="flex gap-3">
-        <a
+      {/* Project links */}
+      <div className="flex flex-wrap gap-3">
+        {project.github && <a
           href={project.github}
+          aria-label={`View ${project.title} on GitHub`}
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 px-4 py-2 text-sm transition-all duration-200 rounded-lg text-slate-300 hover:text-white bg-white/5 hover:bg-white/10"
         >
           <FiGithub size={14} />
           GitHub
-        </a>
+        </a>}
+        {project.live && <a
+          href={project.live}
+          aria-label={`Open ${project.title} deployed site`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 text-sm transition-all duration-200 rounded-lg text-[#00D4FF] hover:text-white bg-[#00D4FF]/10 hover:bg-[#00D4FF]/20"
+        >
+          <FiExternalLink size={14} />
+          Live Site
+        </a>}
       </div>
     </div>
   </motion.div>

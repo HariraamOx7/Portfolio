@@ -37,21 +37,40 @@ const contactLinks = [
 ];
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState(null); // null | "sending" | "sent"
+  const [form, setForm] = useState({ name: "", email: "", message: "", website: "" });
+  const [status, setStatus] = useState(null);
+  const [error, setError] = useState("");
 
-  const handleChange = (e) =>
+  const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (status !== "sending") setStatus(null);
+    setError("");
+  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (status === "sending") return;
     setStatus("sending");
-    // Simulate send
-    setTimeout(() => {
+    setError("");
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || ""}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+        signal: controller.signal,
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) throw new Error(result.error || "Unable to send your message. Please try again.");
       setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus(null), 4000);
-    }, 1200);
+      setForm({ name: "", email: "", message: "", website: "" });
+    } catch (failure) {
+      setStatus("error");
+      setError(failure.name === "AbortError" ? "Sending timed out. Please email me directly if the message does not arrive." : failure.message);
+    } finally {
+      clearTimeout(timeout);
+    }
   };
 
   return (
@@ -130,7 +149,7 @@ const Contact = () => {
                 </span>
               </div>
               <p className="text-slate-400 text-sm">
-                Currently looking for internships, freelance projects, and full-time roles in AI/ML and Web Development.
+                Open to internships and placement opportunities in software development, AI/ML, and web development.
               </p>
             </div>
           </motion.div>
@@ -146,10 +165,15 @@ const Contact = () => {
                 Send a message
               </h3>
 
-              <div className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <p className="text-slate-400 text-sm">Your message will be emailed to hariraam341@gmail.com.</p>
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="contact-website">Website</label>
+                  <input id="contact-website" name="website" value={form.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+                </div>
                 {/* Name */}
                 <div>
-                  <label className="block text-xs text-slate-400 mb-2 font-medium uppercase tracking-wide">
+                  <label htmlFor="contact-name" className="block text-xs text-slate-400 mb-2 font-medium uppercase tracking-wide">
                     Name
                   </label>
                   <div className="relative">
@@ -159,6 +183,11 @@ const Contact = () => {
                     />
                     <input
                       type="text"
+                      id="contact-name"
+                      required
+                      maxLength={100}
+                      autoComplete="name"
+                      disabled={status === "sending"}
                       name="name"
                       value={form.name}
                       onChange={handleChange}
@@ -170,7 +199,7 @@ const Contact = () => {
 
                 {/* Email */}
                 <div>
-                  <label className="block text-xs text-slate-400 mb-2 font-medium uppercase tracking-wide">
+                  <label htmlFor="contact-email" className="block text-xs text-slate-400 mb-2 font-medium uppercase tracking-wide">
                     Email
                   </label>
                   <div className="relative">
@@ -180,6 +209,11 @@ const Contact = () => {
                     />
                     <input
                       type="email"
+                      id="contact-email"
+                      required
+                      maxLength={254}
+                      autoComplete="email"
+                      disabled={status === "sending"}
                       name="email"
                       value={form.email}
                       onChange={handleChange}
@@ -191,7 +225,7 @@ const Contact = () => {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-xs text-slate-400 mb-2 font-medium uppercase tracking-wide">
+                  <label htmlFor="contact-message" className="block text-xs text-slate-400 mb-2 font-medium uppercase tracking-wide">
                     Message
                   </label>
                   <div className="relative">
@@ -200,6 +234,10 @@ const Contact = () => {
                       size={15}
                     />
                     <textarea
+                      id="contact-message"
+                      required
+                      maxLength={5000}
+                      disabled={status === "sending"}
                       name="message"
                       value={form.message}
                       onChange={handleChange}
@@ -212,8 +250,8 @@ const Contact = () => {
 
                 {/* Submit */}
                 <button
-                  onClick={handleSubmit}
-                  disabled={status === "sending" || !form.name || !form.email || !form.message}
+                  type="submit"
+                  disabled={status === "sending" || !form.name.trim() || !form.email.trim() || !form.message.trim()}
                   className="w-full btn-primary py-3.5 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {status === "sending" ? (
@@ -233,14 +271,16 @@ const Contact = () => {
 
                 {status === "sent" && (
                   <motion.p
+                    role="status"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center text-green-400 text-sm"
                   >
-                    Thanks! I'll get back to you soon. 🚀
+                    Your message was submitted successfully. Thanks for getting in touch!
                   </motion.p>
                 )}
-              </div>
+                {error && <p role="alert" className="text-center text-red-400 text-sm">{error}</p>}
+              </form>
             </div>
           </motion.div>
         </div>

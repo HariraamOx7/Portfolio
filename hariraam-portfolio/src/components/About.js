@@ -6,12 +6,12 @@ const stats = [
   { value: "AI/ML", label: "Focus Area" },
   { value: "Full-Stack", label: "Web Dev" },
   { value: "DSA", label: "Problem Solving" },
-  { value: "Open Source", label: "Contributor" },
+  { value: "GeoAI", label: "Mapping Projects" },
 ];
 
 const highlights = [
   { icon: FiUser, text: "CSE Student with AI/ML focus" },
-  { icon: FiMapPin, text: "Based in India" },
+  { icon: FiMapPin, text: "Tirunelveli, Tamil Nadu" },
   { icon: FiBook, text: "Lifelong learner & builder" },
   { icon: FiTarget, text: "Goal-driven engineer" },
 ];
@@ -71,8 +71,9 @@ const About = () => (
             className="text-slate-400 text-base leading-relaxed mb-8"
           >
             I enjoy building real-world applications, solving algorithmic challenges, and continuously
-            learning emerging technologies. My goal is to develop innovative AI-powered solutions
-            that create meaningful impact.
+            learning emerging technologies. My projects include BhuSetu, an agentic travel planner,
+            and a store management system. I am seeking internships and placement opportunities
+            where I can contribute, learn from a team, and grow as a software engineer.
           </motion.p>
 
           {/* Highlights */}

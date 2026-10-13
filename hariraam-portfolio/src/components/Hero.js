@@ -147,7 +147,7 @@ const Hero = () => {
           >
             <span className="w-2 h-2 bg-[#00D4FF] rounded-full animate-pulse"></span>
             <span className="text-sm text-slate-300 font-inter">
-              Available for opportunities
+              Open to internships & placements
             </span>
           </motion.div>
 
@@ -167,7 +167,7 @@ const Hero = () => {
             transition={{ delay: 0.4 }}
             className="font-poppins font-medium text-xl md:text-2xl text-[#00D4FF] mb-4"
           >
-            CSE Student | AI &amp; ML Aspiring Engineer
+            CSE Undergraduate | Aspiring Software Engineer
           </motion.p>
 
           <motion.p
@@ -176,8 +176,8 @@ const Hero = () => {
             transition={{ delay: 0.5 }}
             className="text-slate-400 text-base md:text-lg max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed"
           >
-            Passionate about Artificial Intelligence, Machine Learning, Web
-            Development, and Problem Solving.
+            Building web applications, AI-powered tools, and geospatial projects.
+            Seeking internships and placement opportunities in software development.
           </motion.p>
 
           {/* Buttons */}
@@ -210,7 +210,8 @@ const Hero = () => {
               Contact Me
             </button>
             <a
-              href="mailto:hariraam341@gmail.com?subject=Resume Request"
+              href={`${process.env.PUBLIC_URL}/HARIRAAM_B_Resume.pdf`}
+              download="HARIRAAM_B_Resume.pdf"
               className="btn-outline px-8 py-3 rounded-full font-semibold text-slate-300 text-sm flex items-center gap-2"
             >
               <FiDownload size={16} />

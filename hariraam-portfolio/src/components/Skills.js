@@ -2,11 +2,19 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   SiPython, SiJavascript, SiC, SiHtml5, SiCss3, SiReact,
-  SiNodedotjs, SiExpress, SiMysql, SiMongodb, SiGit,
-  SiGithub, SiVisualstudiocode, SiPostman, SiTensorflow,
+  SiNodedotjs, SiExpress, SiMysql, SiSqlite, SiGit, SiFastapi,
+  SiGithub, SiVisualstudiocode, SiPostman, SiPandas, SiNumpy, SiScikitlearn,
 } from "react-icons/si";
-import { FaJava, FaBrain } from "react-icons/fa";
-import { MdOutlineAnalytics } from "react-icons/md";
+import { FaJava } from "react-icons/fa";
+import { FiUsers, FiTarget, FiClock, FiRefreshCw, FiCpu } from "react-icons/fi";
+
+const softSkills = [
+  { name: "Problem-solving", icon: FiTarget, color: "#00D4FF" },
+  { name: "Analytical thinking", icon: FiCpu, color: "#6C63FF" },
+  { name: "Teamwork", icon: FiUsers, color: "#10B981" },
+  { name: "Adaptability", icon: FiRefreshCw, color: "#FF6584" },
+  { name: "Time management", icon: FiClock, color: "#F7DF1E" },
+];
 
 const skillGroups = [
   {
@@ -25,6 +33,10 @@ const skillGroups = [
     skills: [
       { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
       { name: "CSS3", icon: SiCss3, color: "#1572B6" },
+      { name: "React", icon: SiReact, color: "#61DAFB" },
+      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+      { name: "Express", icon: SiExpress, color: "#ffffff" },
+      { name: "FastAPI", icon: SiFastapi, color: "#009688" },
       ],
   },
   {
@@ -32,10 +44,19 @@ const skillGroups = [
     color: "#FF6584",
     skills: [
       { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+      { name: "SQLite", icon: SiSqlite, color: "#00D4FF" },
   
     ],
   },
- 
+  {
+    category: "Data & Machine Learning",
+    color: "#A78BFA",
+    skills: [
+      { name: "Pandas", icon: SiPandas, color: "#A78BFA" },
+      { name: "NumPy", icon: SiNumpy, color: "#4DABCF" },
+      { name: "scikit-learn", icon: SiScikitlearn, color: "#F7931E" },
+    ],
+  },
   {
     category: "Tools",
     color: "#10B981",
@@ -79,14 +100,15 @@ const Skills = () => (
           02 — Skills
         </p>
         <h2 className="text-4xl font-bold text-white font-poppins md:text-5xl">
-          My <span className="gradient-text">Tech Stack</span>
+          Technical &amp; <span className="gradient-text">Soft Skills</span>
         </h2>
         <p className="max-w-xl mt-4 text-slate-400">
-          Technologies and tools I work with to build impactful solutions.
+          The technologies I use and the personal skills I bring to a team.
         </p>
       </motion.div>
 
       <div className="space-y-12">
+        <h3 className="font-poppins text-2xl font-semibold text-white">Technical Skills</h3>
         {skillGroups.map((group, gi) => (
           <motion.div
             key={group.category}
@@ -112,6 +134,12 @@ const Skills = () => (
             </div>
           </motion.div>
         ))}
+        <div>
+          <h3 className="font-poppins text-2xl font-semibold text-white mb-6">Soft Skills</h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+            {softSkills.map((skill, index) => <SkillCard key={skill.name} skill={skill} index={index} />)}
+          </div>
+        </div>
       </div>
     </div>
   </section>

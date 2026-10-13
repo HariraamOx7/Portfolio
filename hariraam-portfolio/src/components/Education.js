@@ -6,12 +6,13 @@ const educationData = [
   {
     degree: "Bachelor of Engineering (B.E.)",
     field: "Computer Science and Engineering",
-    cgpa: 7.98,
+    institution: "National Engineering College",
+    cgpa: 8.09,
     period: "2024 – 2028",
     location: "Tamil Nadu, India",
     status: "Ongoing",
     highlights: [
-      "Specialization in AI & Machine Learning",
+      "Interest in AI & Machine Learning",
       "Full-Stack Web Development projects",
       "Data Structures & Algorithms",
       "Database Management Systems",
@@ -92,13 +93,14 @@ const Education = () => (
                   >
                     {edu.field}
                   </p>
+                  <p className="text-slate-300 text-sm mt-2">{edu.institution}</p>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-4 mb-5 text-sm text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <FiBook size={13} className="text-slate-500" />
-                  {edu.cgpa}
+                  CGPA: {edu.cgpa}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <FiCalendar size={13} className="text-slate-500" />
@@ -139,9 +141,9 @@ const Education = () => (
           </div>
           <div className="glass-card rounded-2xl p-5 border border-dashed border-slate-700">
             <p className="text-slate-400 text-sm font-medium">
-              Next Chapter — <span className="text-[#6C63FF]">Masters / Industry Role in AI & ML</span>
+              Career Goal — <span className="text-[#6C63FF]">Internships & Software Engineering Placements</span>
             </p>
-            <p className="text-slate-600 text-xs mt-1">The journey continues...</p>
+            <p className="text-slate-400 text-xs mt-1">Apply technical skills, contribute to real-world projects, and gain industry experience.</p>
           </div>
         </motion.div>
       </div>
