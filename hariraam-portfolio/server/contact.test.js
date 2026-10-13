@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createApp } from './app.js';
+import { createApp } from './app.mjs';
 
 const valid = { name: 'Portfolio visitor', email: 'visitor@example.com', message: 'I would like to discuss a software development opportunity.' };
 const env = { GMAIL_USER: 'hariraam341@gmail.com', ALLOWED_ORIGINS: 'http://localhost:3000' };

@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { createMailer } from './mail.js';
+import { createMailer } from './mail.mjs';
 dotenv.config({ path: new URL('.env', import.meta.url), quiet: true });
 const mailer = createMailer(process.env);
 if (!mailer) {
